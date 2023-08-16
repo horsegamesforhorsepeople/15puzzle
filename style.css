@@ -1,0 +1,42 @@
+* {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  color: black;
+}
+
+body {
+  background-color: black;
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+
+#board {
+  display: grid;
+  width: 50vw;
+  aspect-ratio: 1;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 2px;
+  padding: 1em;
+  background-color: #222;
+}
+
+.square {
+  background-color: gray;
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+}
+
+.square[data-value=" "] {
+  background-color: transparent;
+}
+
+.square[data-status="correct"] {
+  background-color: rgb(37, 124, 66);
+}
