@@ -7,12 +7,19 @@ button {
   color: black;
 }
 
+
 body {
   background-color: black;
   height: 100vh;
   margin: 0;
   display: grid;
   place-items: center;
+}
+
+#timer-container {
+  position: absolute;
+  bottom: 15%;
+  font-size: 2rem;
 }
 
 #board {

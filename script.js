@@ -1,4 +1,5 @@
 const pieceMap = new Map();
+let timerInterval;
 
 function updateBoard() {
   let hasWon = true;
@@ -11,6 +12,7 @@ function updateBoard() {
   }
   if (!hasWon) return;
   
+  clearInterval(timerInterval);
   let button = document.createElement("button")
   button.textContent = "play again";
   document.body.append(button)
@@ -21,6 +23,7 @@ function updateBoard() {
 
 function initializeMap() {
   if (document.querySelector("button")) document.querySelector("button").remove()
+  document.getElementById("timer").innerText = 0;
   let availableNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, " "];
   for (let i = 0; i < 16; i++) {
     const randomIndex = Math.floor(Math.random() * availableNumbers.length);
@@ -47,7 +50,16 @@ document.addEventListener("keydown", (event) => {
   }
 })
 
+function timer() {
+  let currentTime = 0;
+  timerInterval = setInterval(() => {
+    currentTime += 0.1;
+    document.getElementById("timer").innerText = currentTime.toFixed(1);
+  }, 100);
+}
+
 function swapPieces(offset) {
+  if (document.getElementById("timer").innerText == 0) timer();
   const blankIndex = getKey(" ");
 
   // return if there is no valid piece at the offset position
@@ -59,25 +71,30 @@ function swapPieces(offset) {
   const movingIndex = blankIndex + offset;
   pieceMap.set(blankIndex, pieceMap.get(movingIndex));
   pieceMap.set(movingIndex, " ");
+
   /*
-  pieceMap.set(0, 1)
-  pieceMap.set(1, 2)
-  pieceMap.set(2, 3)
-  pieceMap.set(3, 4)
-  pieceMap.set(4, 5)
-  pieceMap.set(5, 6)
-  pieceMap.set(6, 7)
-  pieceMap.set(7, 8)
-  pieceMap.set(8, 9)
-  pieceMap.set(9, 10)
-  pieceMap.set(10, 11)
-  pieceMap.set(11, 12)
-  pieceMap.set(12, 13)
-  pieceMap.set(13, 14)
-  pieceMap.set(14, 15)
-  pieceMap.set(15, " ")
+  setTimeout(() => {
+    
+    pieceMap.set(0, 1)
+    pieceMap.set(1, 2)
+    pieceMap.set(2, 3)
+    pieceMap.set(3, 4)
+    pieceMap.set(4, 5)
+    pieceMap.set(5, 6)
+    pieceMap.set(6, 7)
+    pieceMap.set(7, 8)
+    pieceMap.set(8, 9)
+    pieceMap.set(9, 10)
+    pieceMap.set(10, 11)
+    pieceMap.set(11, 12)
+    pieceMap.set(12, 13)
+    pieceMap.set(13, 14)
+    pieceMap.set(14, 15)
+    pieceMap.set(15, " ")
+  }, 1000);
   */
-  updateBoard()
+ 
+ updateBoard()
 
   function getKey(val) {
     return [...pieceMap].find(([key, value]) => val === value)[0];
