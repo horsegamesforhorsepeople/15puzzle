@@ -1,14 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" ml-update="aware" style="--width: 4;"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>15</title>
   <link rel="stylesheet" href="style.css">
-</head>
+<link href="data:text/css,%5Bid*%3D'google_ads_iframe'%5D%2C%5Bid*%3D'taboola-'%5D%2C.taboolaHeight%2C.taboola-placeholder%2C%23credential_picker_container%2C%23credentials-picker-container%2C%23credential_picker_iframe%2C%5Bid*%3D'google-one-tap-iframe'%5D%2C%23google-one-tap-popup-container%2C.google-one-tap-modal-div%2C%23amp_floatingAdDiv%2C%23ez-content-blocker-container%2C%23notify-adblock%7Bdisplay%3Anone!important%3Bmin-height%3A0!important%3Bheight%3A0!important%3B%7D" rel="stylesheet" type="text/css"></head>
 <body>
-  <p id="timer-container"><span id="timer">0</span> s</p>
+	<div id="settings-pane">
+    <div class="setting-item">
+      <label for="squareGap">Gap:</label>
+      <input type="number" id="squareGap" name="squareGap" min="0" onchange="customizeGap(this.value)" />
+    </div>
+    <div class="setting-item">
+      <label for="squareBorderRadius">Square Border Radius:</label>
+      <input type="number" id="squareBorderRadius" name="squareBorderRadius" min="0" onchange="customizeBorderRadius(this.value)" />
+    </div>
+    
+    <div class="setting-item">
+      <label for="fontName">Font Name:</label>
+      <input type="text" id="fontName" name="fontName"onchange="customizeFont(this.value)" />
+    </div>
+    
+    <div class="setting-item">
+      <label for="fontSize">Font Size:</label>
+      <input type="text" id="fontSize" name="fontSize"onchange="customizeFontSize(this.value)" />
+    </div>
+    
+    <div class="setting-item">
+      <label for="enableBoardBackdrop">Board Backdrop:</label>
+      <input type="checkbox" id="enableBoardBackdrop" name="enableBoardBackdrop" onchange="enableBoardBackdrop(this.checked ? 1 : 0)" />
+    </div> 
+    
+    <div class="setting-item">
+      <label for="boardBackdropColor">Board Backdrop Color:</label>
+      <input type="color" id="boardBackdropColor" name="boardBackdropColor" onchange="customizeBoardBackdrop(this.value)" />
+    </div> 
+    
+    <button type="button" id="settings-button-close" onClick="closeSettings();">Save and close</button>
+  </div>
+   
+  <button type="button" id="settings-button" onClick="showSettings();">Settings</button>
+  <p id="timer-container"><span id="timer">Move a piece to start the timer</span></p>
   <div id="board"></div>
+  <button style="position: absolute; left: 0;" onclick="win()">win</button>
+  <div id="history-area">
+    <div>
+      <label style="color: white;" for="speed">speed multiplier:</label>
+      <input type="number" name="speed" id="speed-multiplier" min="0" value="1" step="0.1">
+    </div>
+    <textarea placeholder="enter base64 encoded history here" name="" id="encoded-history" cols="30" rows="10"></textarea>
+    <button id="view-history-button" onclick="viewHistory()">view sequence</button>
+    <button id="copy-history" onclick="copyHistory()">copy sequence</button>
+  </div>
   <script src="script.js"></script>
+
 </body>
 </html>
